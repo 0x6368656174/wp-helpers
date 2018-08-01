@@ -10,6 +10,9 @@ declare(strict_types=1);
 
 namespace ItQuasar\WpHelpers\MetaBox;
 
+/**
+ * Добавляет имя в класс
+ */
 trait WithName
 {
   /** @var string|null */
@@ -28,7 +31,7 @@ trait WithName
   /**
    * Устанавливает имя.
    *
-   * @param string|null $name
+   * @param string|null $name Имя
    *
    * @return self
    */

@@ -11,33 +11,33 @@ declare(strict_types=1);
 namespace ItQuasar\WpHelpers\MetaBox;
 
 /**
- * Добавляет описание в класс
+ * Добавляет иконку в класс
  */
-trait WithDescription
+trait WithIcon
 {
   /** @var string|null */
-  private $description;
+  private $icon;
 
   /**
-   * Возвращает описание.
+   * Возвращает иконку.
    *
    * @return string|null
    */
-  public function getDescription(): ?string
+  public function getIcon(): ?string
   {
-    return $this->description;
+    return $this->icon;
   }
 
   /**
-   * Устанавливает описание.
+   * Устанавливает иконку.
    *
-   * @param string|null $description Описание
+   * @param string|null $icon Иконка
    *
    * @return self
    */
-  public function setDescription(?string $description): self
+  public function setIcon(?string $icon): self
   {
-    $this->description = $description;
+    $this->icon = $icon;
 
     return $this;
   }

@@ -11,14 +11,15 @@ declare(strict_types=1);
 namespace ItQuasar\WpHelpers\MetaBox;
 
 /**
- * Обычное текстовое поле.
+ * Поле для oEmded данных, например видео на YouTube
  */
-class Text extends AbstractMetaBoxBaseField
+class OEmbed extends AbstractMetaBoxBaseField
 {
   protected function getMetaBoxBaseConfig(): array
   {
     return [
-      'type' => 'text',
+      'type' => 'oembed',
     ];
   }
 }
+

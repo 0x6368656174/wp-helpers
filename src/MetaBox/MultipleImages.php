@@ -13,22 +13,22 @@ namespace ItQuasar\WpHelpers\MetaBox;
 /**
  * Несколько картинок.
  */
-class MultipleImages extends AbstractMetaBoxField
+class MultipleImages extends AbstractMetaBoxBaseField
 {
   /** @var int */
   private $maxCount;
 
   /**
-   * Text constructor.
+   * MultipleImages constructor.
    *
    * @param string   $id       Уникальный ID
    * @param string   $name     Имя
    * @param int|null $maxCount Максимальное колличество изображений
    */
-  public function __construct(string $id, string $name, ?int $maxCount)
+  public function __construct(string $id, string $name, ?int $maxCount = null)
   {
-    $this->setName($name);
-    $this->setId($id);
+    parent::__construct($id, $name);
+
     $this->setMaxCount($maxCount);
   }
 
@@ -46,13 +46,17 @@ class MultipleImages extends AbstractMetaBoxField
    * Утсанавливает максимальное количество изображений.
    *
    * @param int|null $maxCount
+   *
+   * @return self
    */
-  public function setMaxCount(?int $maxCount): void
+  public function setMaxCount(?int $maxCount): self
   {
     $this->maxCount = $maxCount;
+
+    return $this;
   }
 
-  protected function getMetaBoxConfig(): array
+  protected function getMetaBoxBaseConfig(): array
   {
     $result = [
       'type' => 'image_advanced',

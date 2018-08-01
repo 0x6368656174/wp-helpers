@@ -13,24 +13,12 @@ namespace ItQuasar\WpHelpers\MetaBox;
 /**
  * Поле выбора поста.
  */
-class Post extends AbstractMetaBoxField
+class Post extends AbstractMetaBoxBaseField
 {
   use WithPlaceholder;
 
   /** @var string[]|null */
   private $postType = null;
-
-  /**
-   * Text constructor.
-   *
-   * @param string $id   Уникальный ID
-   * @param string $name Имя
-   */
-  public function __construct(string $id, ?string $name = null)
-  {
-    $this->setName($name);
-    $this->setId($id);
-  }
 
   /**
    * Возвращает список типов постов, которые должны отображаться в поле.
@@ -46,13 +34,17 @@ class Post extends AbstractMetaBoxField
    * Устанавлиает список типов постов, которые должны отображаться в поле.
    *
    * @param string[]|null $postType
+   *
+   * @return self
    */
-  public function setPostType(?array $postType): void
+  public function setPostType(?array $postType): self
   {
     $this->postType = $postType;
+
+    return $this;
   }
 
-  protected function getMetaBoxConfig(): array
+  protected function getMetaBoxBaseConfig(): array
   {
     $result = [
       'type' => 'post',

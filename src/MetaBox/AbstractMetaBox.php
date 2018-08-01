@@ -10,6 +10,10 @@ declare(strict_types=1);
 
 namespace ItQuasar\WpHelpers\MetaBox;
 
+use function array_merge;
+use Exception;
+use function var_dump;
+
 abstract class AbstractMetaBox
 {
   /** @var string Отображает блок под редактором */
@@ -63,8 +67,28 @@ abstract class AbstractMetaBox
     $id = static::getId();
 
     $fields = [];
-    foreach (static::getControls() as $control) {
-      $control->addToMetaBoxFields($id, $fields);
+    $tabs = [];
+
+    $controls = static::getControls();
+    for ($i = 0; $i < count($controls); ++$i) {
+      $control = $controls[$i];
+      $localFields = [];
+
+      $control->addToMetaBoxFields($id, $localFields);
+
+      if ($control instanceof Tab) {
+        $tabId = "tab-$i";
+        $tabs [$tabId]= [
+          'label' => $control->getName(),
+          'icon' => $control->getIcon(),
+        ];
+
+        foreach($localFields as &$localField) {
+          $localField['tab'] = $tabId;
+        }
+      }
+
+      $fields = array_merge($fields, $localFields);
     }
 
     $result = [
@@ -75,6 +99,10 @@ abstract class AbstractMetaBox
       'priority' => static::getPriority(),
       'fields' => $fields,
     ];
+
+    if (count($tabs) > 0) {
+      $result['tabs'] = $tabs;
+    }
 
     $include = static::getInclude();
     if (null !== $include) {
@@ -92,7 +120,17 @@ abstract class AbstractMetaBox
   /**
    * Возвращает контролы, используемые в MetaBox.
    *
+   * В качестве контролов могут быть возвращены закладки, для группирования контрола в закладки. Для работы закладок
+   * необходимо, чтоб был установлен и включен плагин Meta Box Tabs.
+   *
+   * Для установки плагина при помощи Composer:
+   * ```
+   * $ composer require meta-box/meta-box-tabs:dev-master
+   * ```
+   *
    * @return AbstractMetaBoxControl[]
+   *
+   * @see https://docs.metabox.io/extensions/meta-box-tabs/
    */
   abstract protected static function getControls(): array;
 

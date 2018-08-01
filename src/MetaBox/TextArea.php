@@ -13,21 +13,9 @@ namespace ItQuasar\WpHelpers\MetaBox;
 /**
  * Многострочное текстовое поле.
  */
-class TextArea extends AbstractMetaBoxField
+class TextArea extends AbstractMetaBoxBaseField
 {
-  /**
-   * Text constructor.
-   *
-   * @param string $id   Уникальный ID
-   * @param string $name Имя
-   */
-  public function __construct(string $id, string $name)
-  {
-    $this->setName($name);
-    $this->setId($id);
-  }
-
-  protected function getMetaBoxConfig(): array
+  protected function getMetaBoxBaseConfig(): array
   {
     return [
       'type' => 'textarea',

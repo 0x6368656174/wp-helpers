@@ -10,15 +10,11 @@ declare(strict_types=1);
 
 namespace ItQuasar\WpHelpers\MetaBox;
 
-/**
- * Обычное текстовое поле.
- */
-class Text extends AbstractMetaBoxBaseField
+abstract class AbstractMetaBoxBaseField extends AbstractMetaBoxField
 {
-  protected function getMetaBoxBaseConfig(): array
-  {
-    return [
-      'type' => 'text',
-    ];
+  abstract protected function getMetaBoxBaseConfig(): array;
+
+  protected function getMetaBoxConfig(string $prefix): array {
+    return $this->getMetaBoxBaseConfig();
   }
 }

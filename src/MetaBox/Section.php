@@ -17,10 +17,7 @@ namespace ItQuasar\WpHelpers\MetaBox;
  */
 class Section extends AbstractMetaBoxControl
 {
-  use WithTitle, WithDescription;
-
-  /** @var AbstractMetaBoxField[] */
-  private $fields = [];
+  use WithTitle, WithDescription, WithFields;
 
   /**
    * Section constructor.
@@ -32,44 +29,6 @@ class Section extends AbstractMetaBoxControl
   {
     $this->title = $title;
     $this->fields = $fields;
-  }
-
-  /**
-   * Возвращает поля.
-   *
-   * @return AbstractMetaBoxField[]
-   */
-  public function getFields(): array
-  {
-    return $this->fields;
-  }
-
-  /**
-   * Добавляет поле.
-   *
-   * @param AbstractMetaBoxField $field Поле
-   *
-   * @return Section
-   */
-  public function addField(AbstractMetaBoxField $field): self
-  {
-    $this->fields[] = $field;
-
-    return $this;
-  }
-
-  /**
-   * Устанавливает поля.
-   *
-   * @param array $fields
-   *
-   * @return Section
-   */
-  public function setFields(array $fields): self
-  {
-    $this->fields = $fields;
-
-    return $this;
   }
 
   public function addToMetaBoxFields(string $prefix, array &$fields): void

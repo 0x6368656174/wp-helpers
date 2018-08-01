@@ -10,6 +10,9 @@ declare(strict_types=1);
 
 namespace ItQuasar\WpHelpers\MetaBox;
 
+/**
+ * Добавляет ID в класс
+ */
 trait WithId
 {
   /** @var string */
@@ -28,7 +31,7 @@ trait WithId
   /**
    * Устанавливает ID.
    *
-   * @param string $id
+   * @param string $id ID
    *
    * @return self
    */

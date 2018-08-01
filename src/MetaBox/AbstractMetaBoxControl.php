@@ -10,13 +10,12 @@ declare(strict_types=1);
 
 namespace ItQuasar\WpHelpers\MetaBox;
 
-abstract class AbstractMetaBoxControl
-{
+abstract class AbstractMetaBoxControl {
   /**
    * Добавляет к полям кофигурации MetaBox.io.
    *
    * @param string $prefix Префикс
-   * @param array  $fields Текущия поля конфигурации MetaBox.id
+   * @param array $fields Текущия поля конфигурации MetaBox.io
    */
-  abstract public function addToMetaBoxFields(string $prefix, array &$fields): void;
+  abstract public function addToMetaBoxFields( string $prefix, array &$fields ): void;
 }

@@ -17,7 +17,18 @@ abstract class AbstractMetaBoxField extends AbstractMetaBoxControl
   use WithId, WithName;
 
   /** @var bool */
-  private $clone = false;
+  private $cloneable = false;
+
+  /**
+   * AbstractMetaBoxField constructor.
+   *
+   * @param string $id ID
+   * @param string|null $name Название
+   */
+  public function __construct(string $id, ?string $name = null) {
+    $this->setId($id);
+    $this->setName($name);
+  }
 
   /**
    * Возрващает признак того, что поле можно клонировать.
@@ -26,29 +37,29 @@ abstract class AbstractMetaBoxField extends AbstractMetaBoxControl
    *
    * @return bool
    */
-  public function isClone(): bool
+  public function isCloneable(): bool
   {
-    return $this->clone;
+    return $this->cloneable;
   }
 
   /**
    * Устанавливает признак того, что поле можно клонировать.
    *
-   * @param bool $clone
+   * @param bool $cloneable
    */
-  public function setClone(bool $clone): void
+  public function setCloneable(bool $cloneable): void
   {
-    $this->clone = $clone;
+    $this->cloneable = $cloneable;
   }
 
   public function addToMetaBoxFields(string $prefix, array &$fields): void
   {
     $commonConfig = $this->getCommonMetaBoxConfig($prefix);
-    $config = $this->getMetaBoxConfig();
+    $config = $this->getMetaBoxConfig($prefix);
     $fields[] = array_merge($commonConfig, $config);
   }
 
-  abstract protected function getMetaBoxConfig(): array;
+  abstract protected function getMetaBoxConfig(string $prefix): array;
 
   private function getCommonMetaBoxConfig(string $prefix): array
   {
@@ -60,8 +71,8 @@ abstract class AbstractMetaBoxField extends AbstractMetaBoxControl
       $result['name'] = $this->getName();
     }
 
-    if ($this->isClone()) {
-      $result['clone'] = $this->isClone();
+    if ($this->isCloneable()) {
+      $result['clone'] = $this->isCloneable();
     }
 
     return $result;

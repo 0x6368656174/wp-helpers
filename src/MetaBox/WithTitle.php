@@ -10,6 +10,9 @@ declare(strict_types=1);
 
 namespace ItQuasar\WpHelpers\MetaBox;
 
+/**
+ * Добавляет заголовок в класс
+ */
 trait WithTitle
 {
   /** @var string */
@@ -28,7 +31,7 @@ trait WithTitle
   /**
    * Устанавливает название.
    *
-   * @param string $title
+   * @param string $title Заголовок
    *
    * @return self
    */

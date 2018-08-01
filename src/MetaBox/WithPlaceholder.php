@@ -10,6 +10,9 @@ declare(strict_types=1);
 
 namespace ItQuasar\WpHelpers\MetaBox;
 
+/**
+ * Добавляет текст замещения в класс
+ */
 trait WithPlaceholder
 {
   /** @var string */
@@ -28,7 +31,7 @@ trait WithPlaceholder
   /**
    * Устанавливает текст замещения.
    *
-   * @param string $placeholder
+   * @param string $placeholder Текст замещения
    *
    * @return self
    */
