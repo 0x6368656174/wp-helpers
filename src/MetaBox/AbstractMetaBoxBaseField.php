@@ -10,11 +10,4 @@ declare(strict_types=1);
 
 namespace ItQuasar\WpHelpers\MetaBox;
 
-abstract class AbstractMetaBoxBaseField extends AbstractMetaBoxField
-{
-  abstract protected function getMetaBoxBaseConfig(): array;
-
-  protected function getMetaBoxConfig(string $prefix): array {
-    return $this->getMetaBoxBaseConfig();
-  }
-}
+abstract class AbstractMetaBoxBaseField extends AbstractMetaBoxField { }

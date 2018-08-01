@@ -56,7 +56,7 @@ class MultipleImages extends AbstractMetaBoxBaseField
     return $this;
   }
 
-  protected function getMetaBoxBaseConfig(): array
+  protected function getMetaBoxConfig(): array
   {
     $result = [
       'type' => 'image_advanced',

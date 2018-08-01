@@ -39,7 +39,7 @@ class Tab extends AbstractMetaBoxControl
     $this->fields = $fields;
   }
 
-  public function addToMetaBoxFields(string $prefix, array &$fields): void {
+  public function addToMetaBoxFields(?string $prefix, array &$fields): void {
     foreach ($this->getFields() as $childField) {
       $childField->addToMetaBoxFields($prefix, $fields);
     }

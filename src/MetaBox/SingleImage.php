@@ -15,7 +15,7 @@ namespace ItQuasar\WpHelpers\MetaBox;
  */
 class SingleImage extends AbstractMetaBoxBaseField
 {
-  protected function getMetaBoxBaseConfig(): array
+  protected function getMetaBoxConfig(): array
   {
     return [
       'type' => 'single_image',

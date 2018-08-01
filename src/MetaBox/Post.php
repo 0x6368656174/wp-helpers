@@ -44,7 +44,7 @@ class Post extends AbstractMetaBoxBaseField
     return $this;
   }
 
-  protected function getMetaBoxBaseConfig(): array
+  protected function getMetaBoxConfig(): array
   {
     $result = [
       'type' => 'post',

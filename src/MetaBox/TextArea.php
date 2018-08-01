@@ -15,7 +15,7 @@ namespace ItQuasar\WpHelpers\MetaBox;
  */
 class TextArea extends AbstractMetaBoxBaseField
 {
-  protected function getMetaBoxBaseConfig(): array
+  protected function getMetaBoxConfig(): array
   {
     return [
       'type' => 'textarea',

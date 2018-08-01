@@ -80,12 +80,12 @@ class Group extends AbstractMetaBoxField {
     return $this;
   }
 
-  protected function getMetaBoxConfig(string $prefix): array {
+  protected function getMetaBoxConfig(): array {
     $fields = [];
 
     foreach ($this->getFields() as $childField) {
       $localFields = [];
-      $childField->addToMetaBoxFields($prefix, $localFields);
+      $childField->addToMetaBoxFields(null, $localFields);
 
       $fields = array_merge($fields, $localFields);
     }

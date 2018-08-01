@@ -15,7 +15,7 @@ namespace ItQuasar\WpHelpers\MetaBox;
  */
 class Text extends AbstractMetaBoxBaseField
 {
-  protected function getMetaBoxBaseConfig(): array
+  protected function getMetaBoxConfig(): array
   {
     return [
       'type' => 'text',

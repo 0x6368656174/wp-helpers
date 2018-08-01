@@ -31,7 +31,7 @@ class Section extends AbstractMetaBoxControl
     $this->fields = $fields;
   }
 
-  public function addToMetaBoxFields(string $prefix, array &$fields): void
+  public function addToMetaBoxFields(?string $prefix, array &$fields): void
   {
     $heading = [
       'name' => $this->getTitle(),

@@ -52,19 +52,19 @@ abstract class AbstractMetaBoxField extends AbstractMetaBoxControl
     $this->cloneable = $cloneable;
   }
 
-  public function addToMetaBoxFields(string $prefix, array &$fields): void
+  public function addToMetaBoxFields(?string $prefix, array &$fields): void
   {
     $commonConfig = $this->getCommonMetaBoxConfig($prefix);
     $config = $this->getMetaBoxConfig($prefix);
     $fields[] = array_merge($commonConfig, $config);
   }
 
-  abstract protected function getMetaBoxConfig(string $prefix): array;
+  abstract protected function getMetaBoxConfig(): array;
 
-  private function getCommonMetaBoxConfig(string $prefix): array
+  private function getCommonMetaBoxConfig(?string $prefix): array
   {
     $result = [
-      'id' => $prefix.'__'.$this->getId(),
+      'id' => $prefix ? $prefix.'__'.$this->getId() : $this->getId(),
     ];
 
     if ($this->getName()) {
