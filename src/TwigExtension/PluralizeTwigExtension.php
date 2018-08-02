@@ -12,28 +12,14 @@ namespace ItQuasar\WpHelpers\TwigExtension;
 
 use Exception;
 use Twig_Extension;
+use Twig_SimpleFunction;
 
 class PluralizeTwigExtension extends Twig_Extension
 {
-  /**
-   * Returns the name of this extension.
-   *
-   * @return string
-   */
-  public function getName()
-  {
-    return 'pluralize';
-  }
-
-  /**
-   * Returns the functions this extension adds.
-   *
-   * @return array
-   */
   public function getFunctions()
   {
     return [
-      new \Twig_SimpleFunction('pluralize', [$this, 'getPluralizedString']),
+      new Twig_SimpleFunction('pluralize', [$this, 'getPluralizedString']),
     ];
   }
 

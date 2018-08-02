@@ -16,7 +16,9 @@ use Timber\Image;
 use Timber\Post;
 use Timber\PostPreview;
 use Timber\Term;
+use function var_dump;
 use WC_Product;
+use WC_Product_Attribute;
 use WC_Product_Variable;
 use function wc_get_product;
 
@@ -81,9 +83,17 @@ class WoocommerceProduct
   /**
    * @return float|string
    */
-  public function getRegularPrice()
+  public function getPrice(): float
   {
-    return $this->product->get_regular_price();
+    return (float)$this->product->get_price('edit');
+  }
+
+  /**
+   * @return float
+   */
+  public function getRegularPrice(): float
+  {
+    return (float)$this->product->get_regular_price();
   }
 
   public function getId(): int
@@ -92,11 +102,11 @@ class WoocommerceProduct
   }
 
   /**
-   * @return float|null
+   * @return float
    */
   public function getSalePrice()
   {
-    return $this->product->get_sale_price();
+    return (float)$this->product->get_sale_price();
   }
 
   public function getName(): string
@@ -140,6 +150,9 @@ class WoocommerceProduct
     return $this->product->is_type('variable');
   }
 
+  /**
+   * @return WoocommerceProductVariant[]
+   */
   public function getVariants(): array
   {
     if (!$this->isVariable()) {
@@ -169,12 +182,21 @@ class WoocommerceProduct
    */
   public function getCrossSellProducts(): array
   {
-    $crosSellIds = $this->product->get_cross_sell_ids();
+    $crossSellIds = $this->product->get_cross_sell_ids();
 
     return array_map(function (int $id) {
       $post = new Post($id);
 
       return new WoocommerceProduct($post);
-    }, $crosSellIds);
+    }, $crossSellIds);
+  }
+
+  /**
+   * @return array WoocommerceProductAttribute[]
+   */
+  public function getAttributes(): array {
+    return array_map(function(WC_Product_Attribute $attribute) {
+      return new WoocommerceProductAttribute($attribute);
+    }, $this->product->get_attributes());
   }
 }
