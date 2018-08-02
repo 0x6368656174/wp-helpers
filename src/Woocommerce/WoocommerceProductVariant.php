@@ -30,7 +30,7 @@ class WoocommerceProductVariant
     return $this->woocommerceVariant->get_variation_attributes();
   }
 
-  public function getAddToCardUrl(): string {
+  public function getAddToCartUrl(): string {
     return $this->woocommerceVariant->add_to_cart_url();
   }
 

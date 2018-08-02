@@ -199,4 +199,8 @@ class WoocommerceProduct
       return new WoocommerceProductAttribute($attribute);
     }, $this->product->get_attributes());
   }
+
+  public function getAddToCartUrl(): string {
+    return $this->product->add_to_cart_url();
+  }
 }
