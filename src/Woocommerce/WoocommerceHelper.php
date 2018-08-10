@@ -27,62 +27,54 @@ class WoocommerceHelper
   public const URL_CHECKOUT_PAGE = 'urlCheckoutPage';
   public const URL_PAYMENT_PAGE = 'urlPaymentPage';
   public const URL_LOGOUT = 'urlLogout';
+  public const URL_THANKS_PAGE = 'thanksPage';
+  public const URL_EDIT_PAGE = 'editPage';
+  public const URL_VIEW_ORDER_PAGE = 'viewOrderPage';
+  public const URL_TERMS_PAGE = 'termsPage';
+
+  public static function getPageId($page): ?int {
+    switch ($page) {
+      case static::URL_SHOP_PAGE:
+        return (int)get_option( 'woocommerce_shop_page_id' );
+
+      case static::URL_MY_ACCOUNT_PAGE:
+        return (int)get_option( 'woocommerce_myaccount_page_id' );
+
+      case static::URL_CART_PAGE:
+        return (int)get_option( 'woocommerce_cart_page_id' );
+
+      case static::URL_CHECKOUT_PAGE:
+        return (int)get_option( 'woocommerce_checkout_page_id' );
+
+      case static::URL_PAYMENT_PAGE:
+        return (int)get_option( 'woocommerce_pay_page_id' );
+
+      case static::URL_THANKS_PAGE:
+        return (int)get_option( 'woocommerce_thanks_page_id' );
+
+      case static::URL_EDIT_PAGE:
+        return (int)get_option( 'woocommerce_edit_address_page_id' );
+
+      case static::URL_VIEW_ORDER_PAGE:
+        return (int)get_option( 'woocommerce_edit_address_page_id' );
+
+      case static::URL_TERMS_PAGE:
+        return (int)get_option( 'woocommerce_terms_page_id' );
+    }
+  }
+
+  public static function getPost($page): Post {
+    return new Post(static::getPageId($page));
+  }
 
   /**
    * @param $page
    *
    * @return false|string
    */
-  public static function getUrl($page)
+  public static function getUrl($page): string
   {
-    $result = false;
-
-    switch ($page) {
-  case static::URL_SHOP_PAGE:
-  $result = get_permalink(wc_get_page_id('shop'));
-  break;
-
-  case static::URL_MY_ACCOUNT_PAGE:
-  $myAccountPageId = get_option('woocommerce_myaccount_page_id');
-
-  if ($myAccountPageId) {
-    $result = get_permalink($myAccountPageId);
-  }
-
-  break;
-
-  case static::URL_CART_PAGE:
-  global $woocommerce;
-  $result = $woocommerce->cart->get_cart_url();
-
-  break;
-
-  case static::URL_CHECKOUT_PAGE:
-  global $woocommerce;
-  $result = $woocommerce->cart->get_checkout_url();
-
-  break;
-
-  case static::URL_PAYMENT_PAGE:
-  $result = get_permalink(wc_get_page_id('pay'));
-
-  break;
-
-  case static::URL_LOGOUT:
-  $myAccountPageId = get_option('woocommerce_myaccount_page_id');
-
-  if ($myAccountPageId) {
-    $result = wp_logout_url(get_permalink($myAccountPageId));
-  }
-
-  break;
-  }
-
-    if ('yes' == get_option('woocommerce_force_ssl_checkout')) {
-      $result = str_replace('http:', 'https:', $result);
-    }
-
-    return $result;
+    return static::getPost($page)->link();
   }
 
   /**
