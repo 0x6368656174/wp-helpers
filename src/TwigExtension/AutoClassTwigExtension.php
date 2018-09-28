@@ -50,13 +50,24 @@ class AutoClassTwigExtension extends Twig_Extension
     $lower = strtolower($element->nodeName);
 
     switch ($lower) {
+      case 'h1': return $class.' '.$prefix.$lower.' '.$prefix.'header'.' '.$prefix.'header--level-1';
+      case 'h2': return $class.' '.$prefix.$lower.' '.$prefix.'header'.' '.$prefix.'header--level-2';
+      case 'h3': return $class.' '.$prefix.$lower.' '.$prefix.'header'.' '.$prefix.'header--level-3';
+      case 'h4': return $class.' '.$prefix.$lower.' '.$prefix.'header'.' '.$prefix.'header--level-4';
+      case 'h5': return $class.' '.$prefix.$lower.' '.$prefix.'header'.' '.$prefix.'header--level-5';
+      case 'h6': return $class.' '.$prefix.$lower.' '.$prefix.'header'.' '.$prefix.'header--level-6';
       case 'p': return $class.' '.$prefix.$lower.' '.$prefix.'paragraph';
       case 'ul': return $class.' '.$prefix.$lower.' '.$prefix.'mark-list'.' '.$prefix.'mark-list--level-'.$this->childLevel($element, 'ul');
       case 'ol': return $class.' '.$prefix.$lower.' '.$prefix.'number-list'.' '.$prefix.'number-list--level-'.$this->childLevel($element, 'ol');
       case 'li': return $class.' '.$prefix.$lower.' '.$prefix.'list-item'.' '.$prefix.'list-item--level-'.$this->childLevel($element, 'li');
+      case 'a': return $class.' '.$prefix.$lower.' '.$prefix.'link';
+      case 'table': return $class.' '.$prefix.$lower;
+      case 'thead': return $class.' '.$prefix.$lower.' '.$prefix.'table-head';
       case 'tbody': return $class.' '.$prefix.$lower.' '.$prefix.'table-body';
       case 'tr': return $class.' '.$prefix.$lower.' '.$prefix.'table-row';
+      case 'th': return $class.' '.$prefix.$lower.' '.$prefix.'table-head-cell';
       case 'td': return $class.' '.$prefix.$lower.' '.$prefix.'table-cell';
+      case 'i': return $class.' '.$prefix.$lower.' '.$prefix.'text--italic';
       case 'strong': return $class.' '.$prefix.$lower.' '.$prefix.'text--strong';
       default: return $class.' '.$prefix.$lower;
     }
