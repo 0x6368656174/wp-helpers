@@ -146,16 +146,19 @@ abstract class AbstractMetaBox
     foreach ($controls as $control) {
       // Если контрол содержит
       if (method_exists($control, 'getFields')) {
-        return static::findControl($control->getFields(), $id);
-      } else {
-        if ($control->getId() === $id) {
-          return $control;
+        try {
+          return static::findControl($control->getFields(), $id);
+        } catch (NotFoundMetaBoxException $exception) {
+          continue;
         }
       }
 
-      throw new NotFoundMetaBoxException($id);
+      if ($control->getId() === $id) {
+        return $control;
+      }
     }
 
+    throw new NotFoundMetaBoxException($id);
   }
 
   /**
