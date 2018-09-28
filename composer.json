@@ -21,7 +21,7 @@
   },
   "minimum-stability": "stable",
   "require": {
-    "php-dom": "*",
+    "ext-dom": "*",
     "php": ">=7.1.0",
     "timber/timber": "^1.7"
   },
