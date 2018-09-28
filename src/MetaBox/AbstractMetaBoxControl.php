@@ -18,4 +18,15 @@ abstract class AbstractMetaBoxControl {
    * @param array $fields Текущия поля конфигурации MetaBox.io
    */
   abstract public function addToMetaBoxFields(?string $prefix, array &$fields): void;
+
+  /**
+   * Преобразовывает значени из значения MetaBox'a в стандартное
+   *
+   * @param mixed $value Значение MetaBox'a
+   *
+   * @return mixed
+   */
+  public function mapValue($value) {
+    return $value;
+  }
 }

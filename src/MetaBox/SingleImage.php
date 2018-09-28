@@ -15,10 +15,38 @@ namespace ItQuasar\WpHelpers\MetaBox;
  */
 class SingleImage extends AbstractMetaBoxBaseField
 {
+  /** @var bool */
+  private $forceDelete = false;
+
+  /**
+   * Устанавливает признак того, что изображение должно принудительно удаляться из библиотеки Медиа, если
+   * его удалят из MetaBox'a.
+   *
+   * Будтье внимательны, т.к. изображение может использоваться в каком-нибудь другом месте.
+   *
+   * По-умолчанию, `false`.
+   *
+   * @param bool $forceDelete
+   *
+   * @return self
+   */
+  public function setForceDelete(bool $forceDelete): self
+  {
+    $this->forceDelete = $forceDelete;
+
+    return $this;
+  }
+
   protected function getMetaBoxConfig(): array
   {
-    return [
+    $result = [
       'type' => 'single_image',
     ];
+
+    if ($this->forceDelete) {
+      $result['force_delete'] = true;
+    }
+
+    return $result;
   }
 }

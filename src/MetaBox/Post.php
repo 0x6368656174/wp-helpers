@@ -17,8 +17,20 @@ class Post extends AbstractMetaBoxBaseField
 {
   use WithPlaceholder;
 
+  /** @var string В виде выпадающего меню */
+  const FIELD_TYPE_SELECT = 'select_advanced';
+  /** @var string В виде нескольких выпадающих меню, для работы с детьми */
+  const FIELD_TYPE_SELECT_TREE = 'select_tree';
+  /** @var string В виде спика чекбоксов */
+  const FIELD_TYPE_CHECKBOX_LIST = 'checkbox_list';
+  /** @var string В виде дерева чекбоксов */
+  const FIELD_TYPE_CHECKBOX_TREE = 'checkbox_tree';
+  /** @var string В виде списка радио-кнопок */
+  const FIELD_TYPE_RADIO_LIST = 'radio_list';
+
   /** @var string[]|null */
   private $postType = null;
+  private $fieldType = self::FIELD_TYPE_SELECT;
 
   /**
    * Возвращает список типов постов, которые должны отображаться в поле.
@@ -44,10 +56,27 @@ class Post extends AbstractMetaBoxBaseField
     return $this;
   }
 
+  /**
+   * Устанавливает вид контрола.
+   *
+   * По-умолчанию, `self::FIELD_TYPE_SELECT`.
+   *
+   * @param string $type
+   *
+   * @return Post
+   */
+  public function setFieldType(string $type): self
+  {
+    $this->fieldType = $type;
+
+    return $this;
+  }
+
   protected function getMetaBoxConfig(): array
   {
     $result = [
       'type' => 'post',
+      'field_type' => $this->fieldType,
     ];
 
     if ($this->postType) {

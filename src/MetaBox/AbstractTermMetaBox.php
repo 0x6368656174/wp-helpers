@@ -29,10 +29,11 @@ abstract class AbstractTermMetaBox extends AbstractMetaBox
   /**
    * Возвращает значение для термина с указанным ID $termId для контрола c ID $controlId.
    *
-   * @param int    $termId
+   * @param int $termId
    * @param string $controlId ID контрола
    *
    * @return mixed
+   * @throws NotFoundMetaBoxException
    */
   public static function getValue(int $termId, string $controlId)
   {
@@ -44,14 +45,16 @@ abstract class AbstractTermMetaBox extends AbstractMetaBox
   /**
    * Возврвщает значение для термина $term для контрола с ID $controlId.
    *
-   * @param Term   $term      Термин
+   * @param Term $term Термин
    * @param string $controlId ID контрола
    *
    * @return mixed
+   * @throws NotFoundMetaBoxException
    */
   public static function getTermValue(Term $term, string $controlId)
   {
-    return $term->meta(static::getId().'__'.$controlId);
+    $control = static::getControl($controlId);
+    return $control->mapValue($term->meta(static::getId().'__'.$controlId));
   }
 
   /**

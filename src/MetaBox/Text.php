@@ -15,10 +15,57 @@ namespace ItQuasar\WpHelpers\MetaBox;
  */
 class Text extends AbstractMetaBoxBaseField
 {
+  /** @var int  */
+  private $size = 30;
+  /** @var string[] */
+  private $options = [];
+
+  /**
+   * Устанавлиает размер поля.
+   *
+   * По-умолчанию, `30'.
+   *
+   * @param int $size Размер поля
+   *
+   * @return self
+   */
+  public function setSize(int $size): self
+  {
+    $this->size = $size;
+
+    return $this;
+  }
+
+  /**
+   * Устанавливает варианты текстового поля
+   *
+   * @param string[] $options Варианты
+   *
+   * @return self
+   */
+  public function setOptions(array $options): self
+  {
+    $this->options = $options;
+
+    return $this;
+  }
+
   protected function getMetaBoxConfig(): array
   {
-    return [
+    $result = [
       'type' => 'text',
     ];
+
+    if (30 !== $this->size) {
+      $result['size'] = $this->size;
+    }
+
+    if (count($this->options) > 0) {
+      $result['datalist'] = [
+        'options' => $this->options,
+      ];
+    }
+
+    return $result;
   }
 }

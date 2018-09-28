@@ -12,6 +12,7 @@ namespace ItQuasar\WpHelpers\MetaBox;
 
 use function array_merge;
 use Exception;
+use function method_exists;
 use function var_dump;
 
 abstract class AbstractMetaBox
@@ -115,6 +116,46 @@ abstract class AbstractMetaBox
     }
 
     return $result;
+  }
+
+  /**
+   * Возвращает контрол с указанным ID
+   *
+   * @param string $id ID контрола
+   *
+   * @return AbstractMetaBoxControl
+   * @throws NotFoundMetaBoxException
+   */
+  protected static function getControl(string $id): AbstractMetaBoxControl
+  {
+    $controls = static::getControls();
+
+    return static::findControl($controls, $id);
+  }
+
+  /**
+   * Находит в списке контролов, контрол с указанным ID рекурсивно
+   *
+   * @param AbstractMetaBoxControl[] $controls Список контролов
+   * @param string $id ID контрола
+   *
+   * @return AbstractMetaBoxControl
+   * @throws NotFoundMetaBoxException
+   */
+  private static function findControl(array $controls, string $id): AbstractMetaBoxControl {
+    foreach ($controls as $control) {
+      // Если контрол содержит
+      if (method_exists($control, 'getFields')) {
+        return static::findControl($control->getFields(), $id);
+      } else {
+        if ($control->getId() === $id) {
+          return $control;
+        }
+      }
+
+      throw new NotFoundMetaBoxException($id);
+    }
+
   }
 
   /**

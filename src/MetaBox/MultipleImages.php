@@ -16,11 +16,11 @@ namespace ItQuasar\WpHelpers\MetaBox;
 class MultipleImages extends AbstractMetaBoxBaseField
 {
   /** @var int */
-  private $maxCount;
+  private $maxCount = null;
+  /** @var bool */
+  private $forceDelete = false;
 
   /**
-   * MultipleImages constructor.
-   *
    * @param string   $id       Уникальный ID
    * @param string   $name     Имя
    * @param int|null $maxCount Максимальное колличество изображений
@@ -43,7 +43,7 @@ class MultipleImages extends AbstractMetaBoxBaseField
   }
 
   /**
-   * Утсанавливает максимальное количество изображений.
+   * Устанавливает максимальное количество изображений.
    *
    * @param int|null $maxCount
    *
@@ -56,6 +56,25 @@ class MultipleImages extends AbstractMetaBoxBaseField
     return $this;
   }
 
+  /**
+   * Устанавливает признак того, что изображение должно принудительно удаляться из библиотеки Медиа, если
+   * его удалят из MetaBox'a.
+   *
+   * Будтье внимательны, т.к. изображение может использоваться в каком-нибудь другом месте.
+   *
+   * По-умолчанию, `false`.
+   *
+   * @param bool $forceDelete
+   *
+   * @return self
+   */
+  public function setForceDelete(bool $forceDelete): self
+  {
+    $this->forceDelete = $forceDelete;
+
+    return $this;
+  }
+
   protected function getMetaBoxConfig(): array
   {
     $result = [
@@ -64,6 +83,10 @@ class MultipleImages extends AbstractMetaBoxBaseField
 
     if (null !== $this->maxCount) {
       $result['max_file_uploads'] = $this->maxCount;
+    }
+
+    if ($this->forceDelete) {
+      $result['force_delete'] = true;
     }
 
     return $result;

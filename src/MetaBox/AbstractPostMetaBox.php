@@ -20,10 +20,11 @@ abstract class AbstractPostMetaBox extends AbstractMetaBox
   /**
    * Возвращает значение для поста с указанным ID $postId для контрола c ID $controlId.
    *
-   * @param int    $postId
+   * @param int $postId
    * @param string $controlId ID контрола
    *
    * @return mixed
+   * @throws NotFoundMetaBoxException
    */
   public static function getValue(int $postId, string $controlId)
   {
@@ -35,14 +36,16 @@ abstract class AbstractPostMetaBox extends AbstractMetaBox
   /**
    * Возврвщает значение для поста $post для контрола с ID $controlId.
    *
-   * @param Post   $post      Пост
+   * @param Post $post Пост
    * @param string $controlId ID контрола
    *
    * @return mixed
+   * @throws NotFoundMetaBoxException
    */
   public static function getPostValue(Post $post, string $controlId)
   {
-    return $post->meta(static::getId().'__'.$controlId);
+    $control = static::getControl($controlId);
+    return $control->mapValue($post->meta(static::getId().'__'.$controlId));
   }
 
   public static function toMetaBoxArray(): array
