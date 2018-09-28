@@ -32,7 +32,11 @@ class PluralizeTwigExtension extends Twig_Extension
     if (null === $none) {
       $none = $many;
     }
-    // Handle 0
+
+    if ($count > 19) {
+      $count = $count % 10;
+    }
+
     switch ($count) {
   case 0:
   $string = $none;
