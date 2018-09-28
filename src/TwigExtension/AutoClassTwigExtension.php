@@ -26,8 +26,12 @@ class AutoClassTwigExtension extends Twig_Extension
     ];
   }
 
-  public function getAutoClassString(string $string, string $prefix)
+  public function getAutoClassString(?string $string, string $prefix)
   {
+    if (!$string) {
+      return null;
+    }
+
     $document = new DOMDocument();
     $document->loadHTML('<?xml encoding="utf-8" ?>' . $string);
 
