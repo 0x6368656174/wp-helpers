@@ -144,17 +144,20 @@ abstract class AbstractMetaBox
    */
   private static function findControl(array $controls, string $id): AbstractMetaBoxControl {
     foreach ($controls as $control) {
-      // Если контрол содержит
+      // Если контрол имеет ID
+      if (method_exists($control, 'getId')) {
+        if ($control->getId() === $id) {
+          return $control;
+        }
+      }
+
+      // Если контрол содержит другие контролы
       if (method_exists($control, 'getFields')) {
         try {
           return static::findControl($control->getFields(), $id);
         } catch (NotFoundMetaBoxException $exception) {
           continue;
         }
-      }
-
-      if ($control->getId() === $id) {
-        return $control;
       }
     }
 
