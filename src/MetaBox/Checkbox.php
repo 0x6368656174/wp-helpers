@@ -8,9 +8,7 @@
 
 declare(strict_types=1);
 
-namespace DedMorozTheme\MetaBox;
-
-use ItQuasar\WpHelpers\MetaBox\AbstractMetaBoxBaseField;
+namespace ItQuasar\WpHelpers\MetaBox;
 
 /**
  * Чекбокс
