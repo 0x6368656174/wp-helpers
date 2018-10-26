@@ -44,7 +44,8 @@ class WpQueryBuilder
   private $page = null;
   /** @var null|WpQueryOrderBy[] */
   private $orders = null;
-  private $loagePageFromGetQuery = false;
+  private $loadPageFromGetQuery = false;
+  private $authorId = null;
 
   /**
    * Возвращает массив опций, используемый в конструкторе WP_Query, сформированный конструктором
@@ -68,7 +69,7 @@ class WpQueryBuilder
       $options['paged'] = $this->page;
     }
 
-    if ($this->loagePageFromGetQuery) {
+    if ($this->loadPageFromGetQuery) {
       $options['paged'] = get_query_var('paged');
     }
 
@@ -78,6 +79,10 @@ class WpQueryBuilder
         $queryOrderBy[$orderBy] = $order;
       }
       $options['orderby'] = $queryOrderBy;
+    }
+
+    if ($this->authorId) {
+      $options['author'] = $this->authorId;
     }
 
     return $options;
@@ -172,6 +177,20 @@ class WpQueryBuilder
   }
 
   /**
+   * Устанавлиает ID автора, для которого должны быть выведены посы.
+   *
+   * @param int $id
+   *
+   * @return WpQueryBuilder
+   */
+  public function setAuthorId(int $id): self
+  {
+    $this->authorId = $id;
+
+    return $this;
+  }
+
+  /**
    * Устанавливает признак того, что номер страницы должен быть загружен из GET-запроса.
    *
    * Данный параметр перезаписывает номер страницы, установленный через self::setPage().
@@ -184,7 +203,7 @@ class WpQueryBuilder
    */
   public function setLoadPageFromGetQuery(bool $load): self
   {
-    $this->loagePageFromGetQuery = $load;
+    $this->loadPageFromGetQuery = $load;
 
     return $this;
   }
