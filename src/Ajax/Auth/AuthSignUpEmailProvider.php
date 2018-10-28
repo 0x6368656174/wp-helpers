@@ -54,11 +54,11 @@ class AuthSignUpEmailProvider
    *
    * @param WP_User $user             Новый пользователь
    * @param string  $resetPasswordUrl URL для сброса (задания нового) пароля
-   * @param string  $loginUrl         URL для входа на сайт
+   * @param string  $singInUrl         URL для входа на сайт
    *
    * @return array Email: [to: string, subject: string, message: string, headers: string]
    */
-  public function signUpUserEmail(WP_User $user, string $resetPasswordUrl, string $loginUrl): array
+  public function signUpUserEmail(WP_User $user, string $resetPasswordUrl, string $singInUrl): array
   {
     $blogName = wp_specialchars_decode(get_option('blogname'), ENT_QUOTES);
 
@@ -67,7 +67,7 @@ class AuthSignUpEmailProvider
     $message = sprintf(__('Username: %s'), $user->user_login)."\r\n\r\n";
     $message .= __('To set your password, visit the following address:')."\r\n\r\n";
     $message .= "<$resetPasswordUrl>\r\n\r\n";
-    $message .= "$loginUrl\r\n";
+    $message .= "$singInUrl\r\n";
 
     $email = [
       'to' => $user->user_email,

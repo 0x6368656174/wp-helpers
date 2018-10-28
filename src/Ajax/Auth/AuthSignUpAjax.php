@@ -200,7 +200,7 @@ class AuthSignUpAjax extends AbstractAjaxHandler
   );
 
     // Отправим письмо новому пользователю сайта
-    $mail = $emailProvider->signUpUserEmail($user, AuthSignInAjax::getSignInUrl(), AuthRestorePasswordAjax::createRestorePasswordUrl($user));
+    $mail = $emailProvider->signUpUserEmail($user, AuthRestorePasswordAjax::createRestorePasswordUrl($user), AuthSignInAjax::getSignInUrl());
     wp_mail(
     $mail['to'],
     $mail['subject'],
