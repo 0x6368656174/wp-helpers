@@ -65,6 +65,7 @@ class AutoClassTwigExtension extends Twig_Extension
       case 'ol': return $class.' '.$prefix.$lower.' '.$prefix.'number-list'.' '.$prefix.'number-list--level-'.$this->childLevel($element, 'ol');
       case 'li': return $class.' '.$prefix.$lower.' '.$prefix.'list-item'.' '.$prefix.'list-item--level-'.$this->childLevel($element, 'li');
       case 'a': return $class.' '.$prefix.$lower.' '.$prefix.'link';
+      case 'img': return $class.' '.$prefix.$lower.' '.$prefix.'image';
       case 'table': return $class.' '.$prefix.$lower;
       case 'thead': return $class.' '.$prefix.$lower.' '.$prefix.'table-head';
       case 'tbody': return $class.' '.$prefix.$lower.' '.$prefix.'table-body';
@@ -72,7 +73,9 @@ class AutoClassTwigExtension extends Twig_Extension
       case 'th': return $class.' '.$prefix.$lower.' '.$prefix.'table-head-cell';
       case 'td': return $class.' '.$prefix.$lower.' '.$prefix.'table-cell';
       case 'i': return $class.' '.$prefix.$lower.' '.$prefix.'text--italic';
-      case 'strong': return $class.' '.$prefix.$lower.' '.$prefix.'text--strong';
+      case 'em': return $class.' '.$prefix.$lower.' '.$prefix.'text--italic';
+      case 'b': return $class.' '.$prefix.$lower.' '.$prefix.'text--bold';
+      case 'strong': return $class.' '.$prefix.$lower.' '.$prefix.'text--bold';
       default: return $class.' '.$prefix.$lower;
     }
   }
