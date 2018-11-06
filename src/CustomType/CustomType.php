@@ -36,7 +36,7 @@ class CustomType
 
       $reflectionClass = new ReflectionClass($fullClass);
       // Если класс, является потомком AbstractCustomType
-      if ($reflectionClass->isSubclassOf(AbstractCustomType::class)) {
+      if ($reflectionClass->isSubclassOf(AbstractCustomType::class) && $reflectionClass->isInstantiable()) {
         $customType = $reflectionClass->newInstanceWithoutConstructor();
         $customType->registerPostType();
       }

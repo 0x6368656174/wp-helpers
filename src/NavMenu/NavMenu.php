@@ -38,7 +38,7 @@ class NavMenu
 
       $reflectionClass = new ReflectionClass($fullClass);
       // Если класс, является потомком AbstractNavMenu
-      if ($reflectionClass->isSubclassOf(AbstractNavMenu::class)) {
+      if ($reflectionClass->isSubclassOf(AbstractNavMenu::class) && $reflectionClass->isInstantiable()) {
         $menus[] = $reflectionClass->newInstanceWithoutConstructor();
       }
     }

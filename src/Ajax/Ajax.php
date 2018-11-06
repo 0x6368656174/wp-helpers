@@ -35,7 +35,7 @@ class Ajax
 
       $reflectionClass = new ReflectionClass($fullClass);
       // Если класс, является потомком AbstractMetaBox
-      if ($reflectionClass->isSubclassOf(AbstractAjaxHandler::class)) {
+      if ($reflectionClass->isSubclassOf(AbstractAjaxHandler::class) && $reflectionClass->isInstantiable()) {
         // То выполним метод init()
         $instance = $reflectionClass->newInstanceWithoutConstructor();
         $instance->init();

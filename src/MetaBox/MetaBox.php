@@ -40,7 +40,7 @@ class MetaBox
 
       $reflectionClass = new ReflectionClass($fullClass);
       // Если класс, является потомком AbstractMetaBox
-      if ($reflectionClass->isSubclassOf(AbstractMetaBox::class)) {
+      if ($reflectionClass->isSubclassOf(AbstractMetaBox::class) && $reflectionClass->isInstantiable()) {
         // То выполним метод init()
         $instance = $reflectionClass->newInstanceWithoutConstructor();
         $metaBoxes[] = $instance->toMetaBoxArray();

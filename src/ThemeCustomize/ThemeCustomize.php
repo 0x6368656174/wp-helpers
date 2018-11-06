@@ -39,7 +39,7 @@ class ThemeCustomize
 
       $reflectionClass = new ReflectionClass($fullClass);
       // Если класс, является потомком AbstractSection
-      if ($reflectionClass->isSubclassOf(AbstractSection::class)) {
+      if ($reflectionClass->isSubclassOf(AbstractSection::class) && $reflectionClass->isInstantiable()) {
         $sections[] = $reflectionClass->newInstanceWithoutConstructor();
       }
     }
