@@ -135,6 +135,19 @@ abstract class AbstractCustomType
   }
 
   /**
+   * Возвращает признак того, что пользовательский тип поддерживает
+   * установку родителя.
+   *
+   * По-умолчанию, `false`.
+   *
+   * @return bool
+   */
+  public static function isHierarchical(): bool
+  {
+    return false;
+  }
+
+  /**
    * Возвращает тип записи поста.
    *
    * @return string
@@ -162,6 +175,7 @@ abstract class AbstractCustomType
     'menu_icon' => static::getMenuIcon(),
     'public' => static::getPublic(),
     'capability_type' => static::getCapabilityType(),
+    'hierarchical' => static::isHierarchical(),
   ]
   );
     flush_rewrite_rules();
