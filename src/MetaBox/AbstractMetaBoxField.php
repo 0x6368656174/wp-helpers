@@ -46,10 +46,14 @@ abstract class AbstractMetaBoxField extends AbstractMetaBoxControl
    * Устанавливает признак того, что поле можно клонировать.
    *
    * @param bool $cloneable
+   *
+   * @return self
    */
-  public function setCloneable(bool $cloneable): void
+  public function setCloneable(bool $cloneable): self
   {
     $this->cloneable = $cloneable;
+
+    return $this;
   }
 
   public function addToMetaBoxFields(?string $prefix, array &$fields): void
