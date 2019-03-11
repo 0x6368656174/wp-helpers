@@ -20,6 +20,13 @@ class Select extends AbstractMetaBoxBaseField
   private $displayAllNone = true;
   private $flatten = false;
 
+  /**
+   * Select constructor.
+   *
+   * @param string $id ID
+   * @param array $options Массив с опциями: значение => описание значения
+   * @param string|null $name Название
+   */
   public function __construct(string $id, array $options, ?string $name = null)
   {
     parent::__construct($id, $name);
