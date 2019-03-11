@@ -34,10 +34,10 @@ class Group extends AbstractMetaBoxField {
    * Group constructor.
    *
    * @param string $id ID
-   * @param string $name Название
+   * @param string|null $name Название
    * @param AbstractMetaBoxBaseField[] $fields Поля
    */
-  public function __construct(string $id, string $name, array $fields = [] ) {
+  public function __construct(string $id, ?string $name = null, array $fields = [] ) {
     parent::__construct($id, $name);
     $this->fields = $fields;
   }

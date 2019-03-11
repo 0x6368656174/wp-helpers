@@ -24,10 +24,10 @@ class Select extends AbstractMetaBoxBaseField
    * Select constructor.
    *
    * @param string $id ID
-   * @param array $options Массив с опциями: значение => описание значения
    * @param string|null $name Название
+   * @param array|null $options Массив с опциями: значение => описание значения
    */
-  public function __construct(string $id, array $options, ?string $name = null)
+  public function __construct(string $id, ?string $name = null, ?array $options = null)
   {
     parent::__construct($id, $name);
 

@@ -22,10 +22,10 @@ class MultipleImages extends AbstractMetaBoxBaseField
 
   /**
    * @param string   $id       Уникальный ID
-   * @param string   $name     Имя
+   * @param string|null   $name     Имя
    * @param int|null $maxCount Максимальное колличество изображений
    */
-  public function __construct(string $id, string $name, ?int $maxCount = null)
+  public function __construct(string $id, ?string $name = null, ?int $maxCount = null)
   {
     parent::__construct($id, $name);
 

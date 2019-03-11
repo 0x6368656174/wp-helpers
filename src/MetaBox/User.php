@@ -20,10 +20,10 @@ class User extends AbstractMetaBoxBaseField
 
   /**
    * @param string $id ID
-   * @param array|null $queryArgs Параметры выбора пользователя, @see https://codex.wordpress.org/Function_Reference/get_users
    * @param string|null $name Название
+   * @param array|null $queryArgs Параметры выбора пользователя, @see https://codex.wordpress.org/Function_Reference/get_users
    */
-  public function __construct(string $id, ?array $queryArgs = null, ?string $name = null)
+  public function __construct(string $id, ?string $name = null, ?array $queryArgs = null)
   {
     parent::__construct($id, $name);
 
