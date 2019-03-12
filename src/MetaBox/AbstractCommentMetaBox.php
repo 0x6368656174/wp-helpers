@@ -19,7 +19,7 @@ use Timber\Comment;
  *
  * Для установки плагина при помощи Composer:
  * ```
- * $ composer require wpmetabox/mb-comment-meta:dev-master
+ * $ composer require wpackagist-plugin/mb-comment-meta
  * ```
  *
  * @see https://metabox.io/plugins/mb-comment-meta/
