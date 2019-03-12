@@ -54,7 +54,7 @@ abstract class AbstractTermMetaBox extends AbstractMetaBox
   public static function getTermValue(Term $term, string $controlId)
   {
     $control = static::getControl($controlId);
-    return $control->mapValue($term->meta(static::getId().'__'.$controlId));
+    return $control->mapValue($term->meta(static::getFullControlId($controlId)));
   }
 
   /**

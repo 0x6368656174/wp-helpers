@@ -45,7 +45,7 @@ abstract class AbstractPostMetaBox extends AbstractMetaBox
   public static function getPostValue(Post $post, string $controlId)
   {
     $control = static::getControl($controlId);
-    return $control->mapValue($post->meta(static::getId().'__'.$controlId));
+    return $control->mapValue($post->meta(static::getFullControlId($controlId)));
   }
 
   public static function toMetaBoxArray(): array

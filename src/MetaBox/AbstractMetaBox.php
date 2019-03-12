@@ -52,6 +52,17 @@ abstract class AbstractMetaBox
   abstract public static function getId(): string;
 
   /**
+   * Возвращает ID контрола MetaBox.
+   *
+   * @param string $controlId ID контрола
+   *
+   * @return string
+   */
+  public static function getFullControlId(string $controlId): string {
+    return static::getId().'__'.$controlId;
+  }
+
+  /**
    * Возвращает назваение MetaBox.
    *
    * @return string
