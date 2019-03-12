@@ -33,6 +33,18 @@ class Post extends AbstractMetaBoxBaseField
   private $fieldType = self::FIELD_TYPE_SELECT;
 
   /**
+   * @param string $id ID
+   * @param string|null $name Название
+   * @param array|null $postType Список типов постов, которые должны отображаться в поле.
+   */
+  public function __construct(string $id, ?string $name = null, ?array $postType = null)
+  {
+    parent::__construct($id, $name);
+
+    $this->postType = $postType;
+  }
+
+  /**
    * Возвращает список типов постов, которые должны отображаться в поле.
    *
    * @return string[]|null
