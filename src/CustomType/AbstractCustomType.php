@@ -121,6 +121,20 @@ abstract class AbstractCustomType
   }
 
   /**
+   * Возвращает слаг к архиву (списку) для получения объектов данного типа
+   *
+   * Если вернуть `null`, то для данного типа не будет работать возможность использовать архив (список).
+   *
+   * По-умолчанию, `null`.
+   *
+   * @return string|null
+   */
+  public static function getArchiveSlug(): ?string
+  {
+    return null;
+  }
+
+  /**
    * Возвращает маркер для установки прав для этого типа записи.
    *
    * Встроенным маркеры это: `post` и `page`.
@@ -161,23 +175,26 @@ abstract class AbstractCustomType
   {
     $labels = static::getLabels();
 
-    register_post_type(
-  static::getPostType(),
-  [
-    'labels' => [
-      'name' => $labels['pluralName'],
-      'singular_name' => $labels['singularName'],
-      'add_new' => $labels['addNew'],
-      'add_new_item' => $labels['addNewItem'],
-      'edit_item' => $labels['editItem'],
-    ],
-    'supports' => static::getSupports(),
-    'menu_icon' => static::getMenuIcon(),
-    'public' => static::getPublic(),
-    'capability_type' => static::getCapabilityType(),
-    'hierarchical' => static::isHierarchical(),
-  ]
-  );
+    $options = [
+      'labels' => [
+        'name' => $labels['pluralName'],
+        'singular_name' => $labels['singularName'],
+        'add_new' => $labels['addNew'],
+        'add_new_item' => $labels['addNewItem'],
+        'edit_item' => $labels['editItem'],
+      ],
+      'supports' => static::getSupports(),
+      'menu_icon' => static::getMenuIcon(),
+      'public' => static::getPublic(),
+      'capability_type' => static::getCapabilityType(),
+      'hierarchical' => static::isHierarchical(),
+    ];
+
+    if (static::getArchiveSlug()) {
+      $options['has_archive'] = static::getArchiveSlug();
+    }
+
+    register_post_type(static::getPostType(), $options);
     flush_rewrite_rules();
   }
 
