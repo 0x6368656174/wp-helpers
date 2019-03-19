@@ -39,7 +39,7 @@ abstract class AbstractUserMetaBox extends AbstractMetaBox
   {
     $comment = new User($userId);
 
-    return static::getCommentValue($comment, $controlId);
+    return static::getUserValue($comment, $controlId);
   }
 
   /**
@@ -51,7 +51,7 @@ abstract class AbstractUserMetaBox extends AbstractMetaBox
    * @return mixed
    * @throws NotFoundMetaBoxException
    */
-  public static function getCommentValue(User $user, string $controlId)
+  public static function getUserValue(User $user, string $controlId)
   {
     $control = static::getControl($controlId);
     return $control->mapValue($user->meta(static::getFullControlId($controlId)));
