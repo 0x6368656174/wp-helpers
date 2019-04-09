@@ -34,10 +34,12 @@ class PluralizeTwigExtension extends Twig_Extension
     }
 
     if ($count > 19) {
-      $count = $count % 10;
+      $normalizeCount = $count % 10;
+    } else {
+      $normalizeCount = $count;
     }
 
-    switch ($count) {
+    switch ($normalizeCount) {
   case 0:
   $string = $none;
   break;
